@@ -9,8 +9,8 @@ public class Cinema {
 
     final static int rows = getRows();
     final static int seatsInRow = getSeatsInRow();
-    final static int firstHalf = (Cinema.rows / 2) * Cinema.seatsInRow;
-    final static int secondHalf = (Cinema.rows - (Cinema.rows / 2)) * Cinema.seatsInRow;
+    final static int firstHalf = (rows / 2) * seatsInRow;
+    final static int secondHalf = (rows - (rows / 2)) * seatsInRow;
     final static int allSeats = rows * seatsInRow;
 
     static String[][] SeatingArrangement = new String[rows][seatsInRow];
