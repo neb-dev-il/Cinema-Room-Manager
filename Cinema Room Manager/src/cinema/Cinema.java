@@ -7,13 +7,13 @@ public class Cinema {
 
     final static Scanner SCANNER = new Scanner(System.in);
 
-    final static int rows = getRows();
-    final static int seatsInRow = getSeatsInRow();
-    final static int firstHalf = (rows / 2) * seatsInRow;
-    final static int secondHalf = (rows - (rows / 2)) * seatsInRow;
-    final static int allSeats = rows * seatsInRow;
+    final static int ROWS = getRows();
+    final static int SEATS_IN_ROW = getSeatsInRow();
+    final static int FIRST_HALF = (ROWS / 2) * SEATS_IN_ROW;
+    final static int SECOND_HALF = (ROWS - (ROWS / 2)) * SEATS_IN_ROW;
+    final static int ALL_SEATS = ROWS * SEATS_IN_ROW;
 
-    static String[][] SeatingArrangement = new String[rows][seatsInRow];
+    static String[][] seatingArrangement = new String[ROWS][SEATS_IN_ROW];
 
     private static int getRows() {
         System.out.println("Enter the number of rows:");
@@ -26,9 +26,9 @@ public class Cinema {
     }
 
     static void setSeatingArrangement() {
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < seatsInRow; j++) {
-                SeatingArrangement[i][j] = "S";
+        for (int i = 0; i < ROWS; i++) {
+            for (int j = 0; j < SEATS_IN_ROW; j++) {
+                seatingArrangement[i][j] = "S";
             }
         }
     }
@@ -37,7 +37,7 @@ public class Cinema {
 
         System.out.println("\nCinema:");
 
-        for (int i = 0; i <= seatsInRow; i++) {
+        for (int i = 0; i <= SEATS_IN_ROW; i++) {
             if (i == 0) {
                 System.out.print("  ");
             } else {
@@ -49,10 +49,10 @@ public class Cinema {
 
         int rowsCounter = 1;
 
-        for (int i = 0; i < rows; i++) {
+        for (int i = 0; i < ROWS; i++) {
             System.out.print(rowsCounter + " ");
-            for (int j = 0; j < seatsInRow; j++) {
-                System.out.print(SeatingArrangement[i][j] + " ");
+            for (int j = 0; j < SEATS_IN_ROW; j++) {
+                System.out.print(seatingArrangement[i][j] + " ");
             }
             ++rowsCounter;
             System.out.println();
@@ -76,14 +76,14 @@ class CinemaBoxOffice {
     static int purchasedTickets = 0;
     static double purchasedTicketsInPercentage = 0;
     static int currentIncome = 0;
-    final static int totalIncome = calculateTotalIncome();
+    final static int TOTAL_INCOME = calculateTotalIncome();
 
     static void calculatePurchasedTickets() {
         ++purchasedTickets;
     }
 
     static void calculatePercentage() {
-        purchasedTicketsInPercentage = (double) Math.round(purchasedTickets * 100) / (Cinema.allSeats);
+        purchasedTicketsInPercentage = (double) Math.round(purchasedTickets * 100) / (Cinema.ALL_SEATS);
     }
 
     static void calculateCurrentIncome() {
@@ -91,10 +91,10 @@ class CinemaBoxOffice {
     }
 
     static int calculateTotalIncome() {
-        if (Cinema.allSeats <= 60) {
-            return Cinema.allSeats * 10;
+        if (Cinema.ALL_SEATS <= 60) {
+            return Cinema.ALL_SEATS * 10;
         } else {
-            return (Cinema.firstHalf * 10) + (Cinema.secondHalf * 8);
+            return (Cinema.FIRST_HALF * 10) + (Cinema.SECOND_HALF * 8);
         }
     }
 
@@ -102,7 +102,7 @@ class CinemaBoxOffice {
         System.out.printf("\nNumber of purchased tickets: %d", purchasedTickets);
         System.out.printf("\nPercentage: %.2f%s", purchasedTicketsInPercentage, "%");
         System.out.printf("\nCurrent income: $%d", currentIncome);
-        System.out.printf("\nTotal income: $%d\n", totalIncome);
+        System.out.printf("\nTotal income: $%d\n", TOTAL_INCOME);
     }
 
     public static void chooseSeat() {
@@ -150,10 +150,10 @@ class CinemaBoxOffice {
 
     static void setTicketPrice(int selectedRow) {
 
-        if ((Cinema.allSeats) <= 60) {
+        if ((Cinema.ALL_SEATS) <= 60) {
             ticketPrice = 10;
         } else {
-            if (selectedRow <= (Cinema.rows / 2)) {
+            if (selectedRow <= (Cinema.ROWS / 2)) {
                 ticketPrice = 10;
             } else {
                 ticketPrice = 8;
@@ -168,10 +168,10 @@ class CinemaBoxOffice {
 
     static boolean isCorrectInput(int selectedRow, int selectedSeat) {
 
-        if (selectedRow > Cinema.rows || selectedRow < 0 || selectedSeat > Cinema.seatsInRow || selectedSeat < 0) {
+        if (selectedRow > Cinema.ROWS || selectedRow < 0 || selectedSeat > Cinema.SEATS_IN_ROW || selectedSeat < 0) {
             System.out.println();
             System.out.println("Wrong input!");
-        } else if (Objects.equals(Cinema.SeatingArrangement[--selectedRow][--selectedSeat], "B")) {
+        } else if (Objects.equals(Cinema.seatingArrangement[--selectedRow][--selectedSeat], "B")) {
             System.out.println();
             System.out.println("That ticket has already been purchased!");
         } else {
@@ -182,6 +182,6 @@ class CinemaBoxOffice {
     }
 
     static void markSeat(int selectedRow, int selectedSeat) {
-        Cinema.SeatingArrangement[--selectedRow][--selectedSeat] = "B";
+        Cinema.seatingArrangement[--selectedRow][--selectedSeat] = "B";
     }
 }
