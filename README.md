@@ -1,4 +1,4 @@
-# Cinema-Room-Manager
+# Cinema Room Manager
 
 This program helps manage a cinema theatre: sell tickets, check available seats, see sales statistics, and more.
 
